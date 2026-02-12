@@ -186,6 +186,26 @@ export const specRouter = createTRPCRouter({
       return { success: true };
     }),
 
+  updateWorkItem: publicProcedure
+    .input(
+      z.object({
+        id: z.string(),
+        title: z.string().min(1),
+        details: z.string().nullable(),
+        category: z.string().nullable(),
+        type: z.enum(["STORY", "TASK"]),
+        status: z.enum(["TODO", "IN_PROGRESS", "DONE"]),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      const { id, ...data } = input;
+      await ctx.db.workItem.update({
+        where: { id },
+        data,
+      });
+      return { success: true };
+    }),
+
   deleteWorkItem: publicProcedure
     .input(z.object({ id: z.string() }))
     .mutation(async ({ ctx, input }) => {

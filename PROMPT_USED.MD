@@ -120,6 +120,24 @@ This file logs the major prompts used with AI assistants to help build and refin
 - [x] Replaced `||` with `??` in `toggle-group.tsx` to satisfy `@typescript-eslint/prefer-nullish-coalescing`.
 - [x] Successful build completion via `bun run build`.
 
+---
+
+### 🚀 Kanban Card Edit Feature - 2026-02-12
+**Goal:** Add an edit option to each task card, accessible from both the dropdown menu and within the detail dialog, allowing full editing of all task fields.
+
+**Prompt:**
+> now to kanban-card.tsx add an edit option in dropdown and also inside dialog this should let me edit everything about that task
+
+**Tool Used:** Antigravity with Claude
+**Reason:** Adding inline edit functionality with form state management and a new backend mutation
+
+**Outcome/Notes:**
+- [x] Added `updateWorkItem` mutation to `spec.ts` for persisting edits (title, details, category, type, status).
+- [x] Added "Edit" option with pencil icon to the dropdown menu.
+- [x] Dialog toggles between view mode and edit mode.
+- [x] Edit mode includes inputs for title, description, type, status, and a pill-based category selector.
+- [x] Form resets on cancel or dialog close.
+
 ## 📋 Template for New Entries
 *Copy and paste this when adding a new prompt log.*
 
