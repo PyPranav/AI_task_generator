@@ -19,6 +19,9 @@ const geist = Geist({
   variable: "--font-geist-sans",
 });
 
+import Link from "next/link";
+import { Button } from "~/components/ui/button";
+
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
@@ -31,6 +34,13 @@ export default function RootLayout({
             <SidebarInset>
               <header className="flex h-12 items-center gap-2 border-b px-4">
                 <SidebarTrigger />
+                <div className="ml-auto">
+                  <Link href="/status">
+                    <Button variant="ghost" size="sm">
+                      System Status
+                    </Button>
+                  </Link>
+                </div>
               </header>
               {children}
             </SidebarInset>

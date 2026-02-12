@@ -24,6 +24,32 @@ export const specRouter = createTRPCRouter({
       };
     }),
 
+  checkHealth: publicProcedure.query(async ({ ctx }) => {
+    const start = Date.now();
+    let dbStatus = "unknown";
+    let llmStatus = "unknown";
+
+    try {
+      await ctx.db.$queryRaw`SELECT 1`;
+      dbStatus = "connected";
+    } catch (e) {
+      dbStatus = "error";
+    }
+
+    if (process.env.GEMINI_API_KEY) {
+      llmStatus = "configured";
+    } else {
+      llmStatus = "missing_key";
+    }
+
+    return {
+      status: "ok",
+      latency: Date.now() - start,
+      database: dbStatus,
+      llm: llmStatus,
+    };
+  }),
+
   generate: publicProcedure
     .input(
       z.object({

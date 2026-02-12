@@ -1,29 +1,60 @@
-# Create T3 App
+# AI Task Generator
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+A web application that generates detailed project specifications, user stories, and engineering tasks from a simple idea using AI.
 
-## What's next? How do I make an app with this?
+## Features (What is Done)
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+- **AI-Powered Spec Generation**: Enter a project idea, goals, and constraints to generate a full specification using Google Gemini Flash.
+- **Interactive Kanban Board**: Manage generated tasks with a drag-and-drop interface.
+    - **Reorder**: Drag tasks between columns or reorder within columns.
+    - **Edit**: Edit task details, types, and categories.
+    - **Filter**: Filter tasks by type (Story/Task) or Category.
+- **Export Functionality**: Export your spec to a formatted Markdown file or copy to clipboard.
+- **History**: View and navigate through the last 5 generated specs via the sidebar.
+- **Status Page**: Monitor system health (Database, LLM, Backend) at `/status`.
+- **Modern UI**: Built with Shadcn/UI, Tailwind CSS, and Framer Motion for a polished, responsive, dark-mode experience.
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+## What is Not Done
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Drizzle](https://orm.drizzle.team)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+- **Authentication**: Currently, the app is open and does not require login.
+- **Complex Team Features**: No multi-user real-time collaboration (though optimistic UI is implemented).
+- **Custom LLM Configuration**: Currently hardcoded to use Gemini Flash via environment variables.
 
-## Learn More
+## How to Run
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+1.  **Clone the repository**
+2.  **Install dependencies**:
+    ```bash
+    bun install
+    ```
+3.  **Set up Environment Variables**:
+    - Copy `.env.example` to `.env`
+    - Add your `DATABASE_URL` (PostgreSQL)
+    - Add your `GEMINI_API_KEY`
+4.  **Initialize Database**:
+    ```bash
+    bunx prisma db push
+    ```
+5.  **Run Development Server**:
+    ```bash
+    bun run dev
+    ```
+    Open [http://localhost:3000](http://localhost:3000)
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+## Deployment
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+To build for production:
+```bash
+bun run build
+bun start
+```
 
-## How do I deploy this?
+## Tech Stack
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+- **Framework**: Next.js (App Router)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **UI Components**: Shadcn/UI
+- **Database**: PostgreSQL (via Prisma)
+- **State/API**: tRPC, TanStack Query
+- **AI**: Google Gemini Flash

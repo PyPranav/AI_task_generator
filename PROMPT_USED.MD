@@ -104,7 +104,7 @@ This file logs the major prompts used with AI assistants to help build and refin
 
 ---
 
-### 🚀 Build & Linting Fixes - 2026-02-12
+### 🚀 Build & Linting Fixes 
 **Goal:** Fix build failures and ESLint errors caused by strict linting rules.
 
 **Prompt:**
@@ -122,7 +122,7 @@ This file logs the major prompts used with AI assistants to help build and refin
 
 ---
 
-### 🚀 Kanban Card Edit Feature - 2026-02-12
+### 🚀 Kanban Card Edit Feature
 **Goal:** Add an edit option to each task card, accessible from both the dropdown menu and within the detail dialog, allowing full editing of all task fields.
 
 **Prompt:**
@@ -140,7 +140,7 @@ This file logs the major prompts used with AI assistants to help build and refin
 
 ---
 
-### 🚀 Spec Export Button - 2026-02-12
+### 🚀 Spec Export Button
 **Goal:** Add an export button next to the spec title that lets users download or copy the entire spec state as a pretty-formatted Markdown file.
 
 **Prompt:**
@@ -158,18 +158,19 @@ This file logs the major prompts used with AI assistants to help build and refin
 
 ---
 
-## 📋 Template for New Entries
-*Copy and paste this when adding a new prompt log.*
-
-```markdown
-### 🚀 [Feature Name] - YYYY-MM-DD
-**Goal:** 
+### 🚀 System Status Page
+**Goal:** Add a page to monitor the operational status of the database, LLM service, and backend API.
 
 **Prompt:**
-> 
+> add a status page that shows operational status of db, llm, and backend and add the button to nav top right
 
-**Tool Used:** 
-**Reason:** 
+**Tool Used:** Antigravity with Gemini 3.0 Flash
+**Reason:** To provide real-time visibility into the health of critical system components.
 
-**Outcome/Notes:** 
-```
+**Outcome/Notes:**
+- [x] Created `src/app/status/page.tsx` displaying status for Backend, Database, and LLM.
+- [x] Added visual indicators (Green/Red/Yellow) for different states.
+- [x] Added "System Status" button to the top-right navigation in `root` layout.
+
+---
+

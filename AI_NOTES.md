@@ -18,4 +18,10 @@ This file tracks the evolution of the **taskGenerator** project, distinguishing 
 - [x] Created the generation form inputs
 - [x] Added new spec button to the sidebar
 - [x] fixed build errors so far
+- [x] kanban card edit and delete functionality
+- [x] export functionality
+- [x] added status page
+- [x] also have externally used gpt and gemini for the md files
 
+## AI model used for spec generation
+I have went ahead with gemini with "gemini-flash-latest" set as model, it currently points to gemini 2.5 flash and will be updated to point to new flash model as google releases stable versions for them. I the major reason for choosing gemini is that the flash model is exceptionally capable for cost effectivness and inference speed, also it suits small projects like this one as we can test stuff out free of cost.
