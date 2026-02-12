@@ -1,6 +1,7 @@
 "use client";
 
 import { ChevronDown, FileText, Loader2, Plus } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 import { api } from "~/trpc/react";
 import {
@@ -20,6 +21,8 @@ import { ScrollArea } from "~/components/ui/scroll-area";
 import Link from "next/link";
 
 export function SpecSidebar() {
+  const pathname = usePathname();
+
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } =
     api.spec.list.useInfiniteQuery(
       { limit: 5 },
@@ -72,7 +75,12 @@ export function SpecSidebar() {
 
                 {specs.map((spec) => (
                   <SidebarMenuItem key={spec.id}>
-                    <SidebarMenuButton asChild tooltip={spec.title} className="group py-6 transition-all duration-200 hover:bg-accent/50 selection:bg-primary/20">
+                    <SidebarMenuButton
+                      asChild
+                      isActive={pathname === `/${spec.id}`}
+                      tooltip={spec.title}
+                      className="group py-6 transition-all duration-200 hover:bg-accent/50"
+                    >
                       <Link href={`/${spec.id}`}>
                         <FileText className="shrink-0 text-primary/70 group-hover:text-primary" />
                         <div className="flex min-w-0 flex-col gap-0.5">

@@ -174,3 +174,21 @@ This file logs the major prompts used with AI assistants to help build and refin
 
 ---
 
+### 🚀 Full-Page Loading Overlay & Auto-Redirect
+**Goal:** Replace the inline button loader with a full-page loading overlay featuring a spinner and randomly cycling status messages, and automatically redirect to the generated spec page.
+
+**Prompt:**
+> when you click on generate right now it shows loader on button and doesnt even redirect to result once done, i want it to be a full page loader (spinner) and have random changing test below saying generating specs and stuff on that line, use shadcn_skill.md as needed and make sure to redirect to /{id} once done
+
+**Tool Used:** Antigravity with Claude
+**Reason:** Improving UX during long-running generation — the inline button spinner was insufficient and lacked redirect logic.
+
+**Outcome/Notes:**
+- [x] Installed shadcn `spinner` component.
+- [x] Added full-page overlay with `Spinner` and 11 rotating status messages (cycling every 2.5s with fade-in animation).
+- [x] Added `onSuccess` handler to redirect to `/{specId}` after generation.
+- [x] Added `isRedirecting` state to keep the loader visible until page navigation completes.
+- [x] Invalidated `spec.list` query on success so the sidebar updates with the new spec immediately.
+- [x] Added active route highlighting in the sidebar via `usePathname()` and `isActive` prop.
+
+---
