@@ -17,6 +17,7 @@ import {
   SidebarRail,
 } from "~/components/ui/sidebar";
 import { ScrollArea } from "~/components/ui/scroll-area";
+import Link from "next/link";
 
 export function SpecSidebar() {
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } =
@@ -55,15 +56,17 @@ export function SpecSidebar() {
 
                 {specs.map((spec) => (
                   <SidebarMenuItem key={spec.id}>
-                    <SidebarMenuButton tooltip={spec.title}>
-                      <FileText className="shrink-0" />
-                      <div className="flex min-w-0 flex-col">
-                        <span className="truncate">{spec.title}</span>
-                        <span className="text-muted-foreground text-xs">
-                          {new Date(spec.createdAt).toLocaleDateString()}
-                        </span>
-                      </div>
-                    </SidebarMenuButton>
+                    <Link href={`/${spec.id}`}>
+                      <SidebarMenuButton tooltip={spec.title} className="py-6">
+                        <FileText className="shrink-0" />
+                        <div className="flex min-w-0 flex-col">
+                          <span className="truncate w-[230px]">{spec.title}</span>
+                          <span className="text-muted-foreground text-xs">
+                            {new Date(spec.createdAt).toLocaleDateString()}
+                          </span>
+                        </div>
+                      </SidebarMenuButton>
+                    </Link>
                   </SidebarMenuItem>
                 ))}
 
