@@ -53,6 +53,55 @@ This file logs the major prompts used with AI assistants to help build and refin
 - [x] Styled the button with a "+" icon and hover animations.
 - [x] Integrated navigation to the home page (`/`).
 
+---
+
+### 🚀 Kanban Board Interface
+**Goal:** Build a draggable Kanban board UI similar to the provided reference, integrated with Supabase.
+
+**Prompt:**
+> now add components to _component for required to make ui similar to in image and also i have installed hello-pangea/dnd use it for this just make the ui look similar to the image in dark theme though similar to our current setup, the task/userstory should be dragable and everything should update in supabase accordingly by hitting an appropriate router function
+
+**Tool Used:** Claude Code
+**Reason:** Fairly complex prompt, with a lot to do
+
+**Outcome/Notes:** 
+- [x] Created `KanbanBoard`, `KanbanColumn`, and `KanbanCard` components.
+- [x] Integrated `@hello-pangea/dnd` for drag-and-drop functionality.
+- [x] Synchronized board state with Supabase via TRPC mutations.
+
+---
+
+### 🚀 Optimistic UI for Kanban
+**Goal:** Prevent "snapping back" during drag-and-drop by implementing optimistic updates.
+
+**Prompt:**
+> everything is great but we need optimistic updates after dragging it snaps back to the original location then goes to new locaiton once db is done.
+
+**Tool Used:** Claude Code
+**Reason:** Refining UX for better responsiveness
+
+**Outcome/Notes:** 
+- [x] Implemented `onMutate`, `onError`, and `onSettled` in TRPC mutation for immediate UI feedback.
+- [x] Manually updated query cache to reflect changes before server confirmation.
+
+---
+
+### 🚀 Kanban Filtering
+**Goal:** Implement a filter bar to filter work items by type (Story/Task) and by categories.
+
+**Prompt:**
+> now add a filter that lets me show and interact with just a category or type use shadcn_skill.md
+
+**Tool Used:** Claude Code
+**Reason:** Complex filtering logic integration with existing DnD board
+
+**Outcome/Notes:** 
+- [x] Installed shadcn `badge` and `toggle-group` components.
+- [x] Created `KanbanFilters` component with type and category toggles.
+- [x] Added filter state to `KanbanBoard` and implemented filtering logic.
+- [x] Dynamically derived category list from available work items.
+- [x] Integrated badge counts for each filter option.
+
 ## 📋 Template for New Entries
 *Copy and paste this when adding a new prompt log.*
 

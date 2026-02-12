@@ -126,4 +126,52 @@ export const specRouter = createTRPCRouter({
 
       return { items, nextCursor };
     }),
+
+  getById: publicProcedure
+    .input(z.object({ id: z.string() }))
+    .query(async ({ ctx, input }) => {
+      return ctx.db.spec.findUniqueOrThrow({
+        where: { id: input.id },
+      });
+    }),
+
+  getWorkItems: publicProcedure
+    .input(z.object({ specId: z.string() }))
+    .query(async ({ ctx, input }) => {
+      return ctx.db.workItem.findMany({
+        where: { specId: input.specId },
+        orderBy: { order: "asc" },
+      });
+    }),
+
+  updateWorkItemStatus: publicProcedure
+    .input(
+      z.object({
+        id: z.string(),
+        status: z.enum(["TODO", "IN_PROGRESS", "DONE"]),
+        // Full ordered list of item IDs in the destination column
+        orderedIds: z.array(z.string()),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      await ctx.db.$transaction(async (tx) => {
+        // Update the dragged item's status
+        await tx.workItem.update({
+          where: { id: input.id },
+          data: { status: input.status },
+        });
+
+        // Re-order every item in the destination column
+        await Promise.all(
+          input.orderedIds.map((itemId, index) =>
+            tx.workItem.update({
+              where: { id: itemId },
+              data: { order: index },
+            }),
+          ),
+        );
+      });
+
+      return { success: true };
+    }),
 });
