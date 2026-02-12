@@ -61,5 +61,8 @@
   },
   "ct3aMetadata": {
     "initVersion": "7.40.0"
+  },
+  "overrides": {
+    "glob": "^11.0.0"
   }
 }
