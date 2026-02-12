@@ -75,7 +75,7 @@ export default function StatusPage() {
                     <p className="text-xs text-muted-foreground">Latency: {data?.latency}ms</p>
                   </div>
                 </div>
-                <Badge variant="outline" className={getStatusColor(data?.status || "unknown")}>
+                    <Badge variant="outline" className={getStatusColor(data?.status ?? "unknown")}>
                   {data?.status === "ok" ? "Operational" : "Degraded"}
                 </Badge>
               </div>
@@ -106,7 +106,7 @@ export default function StatusPage() {
                     <p className="text-xs text-muted-foreground">Prisma Connection</p>
                   </div>
                 </div>
-                <Badge variant="outline" className={getStatusColor(data?.database || "unknown")}>
+                    <Badge variant="outline" className={getStatusColor(data?.database ?? "unknown")}>
                   {data?.database === "connected" ? "Connected" : "Error"}
                 </Badge>
               </div>
@@ -137,7 +137,7 @@ export default function StatusPage() {
                     <p className="text-xs text-muted-foreground">Gemini API Key</p>
                   </div>
                 </div>
-                <Badge variant="outline" className={getStatusColor(data?.llm || "unknown")}>
+                    <Badge variant="outline" className={getStatusColor(data?.llm ?? "unknown")}>
                   {data?.llm === "configured" ? "Configured" : "Missing Key"}
                 </Badge>
               </div>
