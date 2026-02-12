@@ -16,4 +16,5 @@ This file tracks the evolution of the **taskGenerator** project, distinguishing 
 
 - [x] Created the sidebar component using shadcn ui
 - [x] Created the generation form inputs
+- [x] Added new spec button to the sidebar
 

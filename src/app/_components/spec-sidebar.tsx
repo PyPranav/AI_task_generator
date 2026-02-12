@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronDown, FileText, Loader2 } from "lucide-react";
+import { ChevronDown, FileText, Loader2, Plus } from "lucide-react";
 
 import { api } from "~/trpc/react";
 import {
@@ -36,6 +36,22 @@ export function SpecSidebar() {
         <span className="px-2 text-sm font-semibold">Task Generator</span>
       </SidebarHeader>
       <SidebarContent>
+        <div className="px-3 py-4">
+          <SidebarMenuButton
+            asChild
+            className=" w-full h-11 justify-start gap-3 bg-primary/5 border border-primary/20 hover:border-primary/40 hover:bg-primary/10 transition-all duration-300 shadow-sm"
+            tooltip="Create New Spec"
+          >
+            <Link href="/" className="group">
+              <div className="flex items-center justify-center size-6 rounded-md bg-primary text-primary-foreground transition-transform duration-300 group-hover:rotate-90 group-hover:scale-110">
+                <Plus className="size-4" />
+              </div>
+              <span className="font-bold tracking-tight text-primary/90 transition-colors group-hover:text-primary">
+                New Spec
+              </span>
+            </Link>
+          </SidebarMenuButton>
+        </div>
         <ScrollArea className="flex-1">
           <SidebarGroup>
             <SidebarGroupLabel>Previous Specs</SidebarGroupLabel>
@@ -56,17 +72,17 @@ export function SpecSidebar() {
 
                 {specs.map((spec) => (
                   <SidebarMenuItem key={spec.id}>
-                    <Link href={`/${spec.id}`}>
-                      <SidebarMenuButton tooltip={spec.title} className="py-6">
-                        <FileText className="shrink-0" />
-                        <div className="flex min-w-0 flex-col">
-                          <span className="truncate w-[230px]">{spec.title}</span>
-                          <span className="text-muted-foreground text-xs">
-                            {new Date(spec.createdAt).toLocaleDateString()}
+                    <SidebarMenuButton asChild tooltip={spec.title} className="group py-6 transition-all duration-200 hover:bg-accent/50 selection:bg-primary/20">
+                      <Link href={`/${spec.id}`}>
+                        <FileText className="shrink-0 text-primary/70 group-hover:text-primary" />
+                        <div className="flex min-w-0 flex-col gap-0.5">
+                          <span className="truncate font-medium md:w-[200px] w-[230px]">{spec.title}</span>
+                          <span className="text-muted-foreground/60 text-[10px] uppercase tracking-wider font-semibold">
+                            {new Date(spec.createdAt).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })}
                           </span>
                         </div>
-                      </SidebarMenuButton>
-                    </Link>
+                      </Link>
+                    </SidebarMenuButton>
                   </SidebarMenuItem>
                 ))}
 
