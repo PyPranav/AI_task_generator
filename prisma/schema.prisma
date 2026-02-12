@@ -1,0 +1,52 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+    provider = "prisma-client-js"
+    output   = "../generated/prisma"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Spec {
+  id          String     @id @default(cuid())
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  title       String
+  goal        String
+  users       String
+  constraints String
+  
+  workItems   WorkItem[]
+}
+
+enum WorkItemStatus {
+  TODO
+  IN_PROGRESS
+  DONE
+}
+
+enum WorkItemType {
+  STORY
+  TASK
+}
+
+model WorkItem {
+  id        String         @id @default(cuid())
+  createdAt DateTime       @id @default(now())
+  title     String
+  details   String?        @db.Text
+  
+  status    WorkItemStatus @default(TODO)
+  type      WorkItemType   @default(TASK)
+  order     Int            @default(0)
+  
+  category  String?    
+  
+  specId    String
+  spec      Spec           @relation(fields: [specId], references: [id], onDelete: Cascade)
+}
