@@ -3,6 +3,7 @@
 import { use } from "react";
 import { api } from "~/trpc/react";
 import { KanbanBoard } from "~/app/_components/kanban-board";
+import { SpecExportButton } from "~/app/_components/spec-export-button";
 import { Skeleton } from "~/components/ui/skeleton";
 
 interface SpecPageProps {
@@ -12,6 +13,7 @@ interface SpecPageProps {
 export default function SpecPage({ params }: SpecPageProps) {
   const { specId } = use(params);
   const { data: spec, isLoading } = api.spec.getById.useQuery({ id: specId });
+  const { data: workItems } = api.spec.getWorkItems.useQuery({ specId });
 
   return (
     <main className="min-h-[calc(100vh-3rem)]">
@@ -24,19 +26,26 @@ export default function SpecPage({ params }: SpecPageProps) {
           </div>
         ) : (
           <div className="mx-auto max-w-7xl">
-            <h1 className="text-2xl font-bold tracking-tight text-foreground">
-              {spec?.title}
-            </h1>
-            <p className="mt-1 text-sm text-muted-foreground">
-              Created{" "}
-              {spec?.createdAt
-                ? new Date(spec.createdAt).toLocaleDateString(undefined, {
-                    month: "long",
-                    day: "numeric",
-                    year: "numeric",
-                  })
-                : ""}
-            </p>
+              <div className="flex items-center justify-between">
+                <div>
+                  <h1 className="text-2xl font-bold tracking-tight text-foreground">
+                    {spec?.title}
+                  </h1>
+                  <p className="mt-1 text-sm text-muted-foreground">
+                    Created{" "}
+                    {spec?.createdAt
+                      ? new Date(spec.createdAt).toLocaleDateString(undefined, {
+                        month: "long",
+                        day: "numeric",
+                        year: "numeric",
+                      })
+                      : ""}
+                  </p>
+                </div>
+                {spec && workItems && (
+                  <SpecExportButton spec={spec} workItems={workItems} />
+                )}
+              </div>
           </div>
         )}
       </div>

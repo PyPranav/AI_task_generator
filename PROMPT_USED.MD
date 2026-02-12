@@ -138,6 +138,26 @@ This file logs the major prompts used with AI assistants to help build and refin
 - [x] Edit mode includes inputs for title, description, type, status, and a pill-based category selector.
 - [x] Form resets on cancel or dialog close.
 
+---
+
+### 🚀 Spec Export Button - 2026-02-12
+**Goal:** Add an export button next to the spec title that lets users download or copy the entire spec state as a pretty-formatted Markdown file.
+
+**Prompt:**
+> now in the title of @[src/app/[specId]] next to it add a export button that triggers a drop down with 2 option, download as md or copy as md, and give the entire current state of the spec in a preaty looking markdown format
+
+**Tool Used:** Antigravity with Claude
+**Reason:** Creating a new component with markdown generation logic, dropdown UI, and clipboard/download integration
+
+**Outcome/Notes:**
+- [x] Created `SpecExportButton` component with dropdown menu (Download as .md / Copy as Markdown).
+- [x] Generates structured Markdown with spec metadata, progress summary table, user stories by status, and tasks grouped by category.
+- [x] Integrated into spec page header next to title.
+- [x] Uses sonner toasts for success/error feedback.
+- [x] Fetches work items on the spec page to pass full data to the export component.
+
+---
+
 ## 📋 Template for New Entries
 *Copy and paste this when adding a new prompt log.*
 
