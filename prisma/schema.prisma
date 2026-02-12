@@ -20,6 +20,7 @@ model Spec {
   goal        String
   users       String
   constraints String
+  risks       String
   
   workItems   WorkItem[]
 }
@@ -37,7 +38,8 @@ enum WorkItemType {
 
 model WorkItem {
   id        String         @id @default(cuid())
-  createdAt DateTime       @id @default(now())
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
   title     String
   details   String?        @db.Text
   

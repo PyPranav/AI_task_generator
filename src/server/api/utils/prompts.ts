@@ -1,3 +1,20 @@
+export function generateBasePrompt(spec: {title: string, projectGoals: string, targetUsers: string, projectConstraints: string, userStories?: string}) {
+    let prompt = `
+    Below is the in depth details of the project.
+    Title: ${spec.title}
+    Project Goals: ${spec.projectGoals}
+    Target Users: ${spec.targetUsers}
+    Constraints: ${spec.projectConstraints}
+    `
+    if (spec.userStories) {
+        prompt += `
+        User Stories: ${spec.userStories}
+        `
+    }
+    return prompt;
+}
+
+
 export const userStoryPrompt = `
 You are a Senior Product Manager. Your task is to analyze a feature idea and generate a list of high-impact User Stories.
 

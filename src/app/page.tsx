@@ -1,46 +1,114 @@
-import Link from "next/link";
+"use client";
 
-import { api, HydrateClient } from "~/trpc/server";
+import { useState } from "react";
+import { api } from "~/trpc/react";
+import { Button } from "~/components/ui/button";
+import { Input } from "~/components/ui/input";
+import { Textarea } from "~/components/ui/textarea";
+import { Label } from "~/components/ui/label";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "~/components/ui/card";
 
-export default async function Home() {
+export default function Home() {
+  const [title, setTitle] = useState("");
+  const [projectGoals, setProjectGoals] = useState("");
+  const [projectConstraints, setProjectConstraints] = useState("");
+  const [targetUsers, setTargetUsers] = useState("");
+  const [risks, setRisks] = useState("");
+
+  const generate = api.spec.generate.useMutation();
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    generate.mutate({
+      title,
+      projectGoals,
+      projectConstraints,
+      targetUsers,
+      risks,
+    });
+  };
 
   return (
-    <HydrateClient>
-      <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
-        <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16">
-          <h1 className="text-5xl font-extrabold tracking-tight sm:text-[5rem]">
-            Create <span className="text-[hsl(280,100%,70%)]">T3</span> App
-          </h1>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
-            <Link
-              className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 hover:bg-white/20"
-              href="https://create.t3.gg/en/usage/first-steps"
-              target="_blank"
-            >
-              <h3 className="text-2xl font-bold">First Steps →</h3>
-              <div className="text-lg">
-                Just the basics - Everything you need to know to set up your
-                database and authentication.
-              </div>
-            </Link>
-            <Link
-              className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 hover:bg-white/20"
-              href="https://create.t3.gg/en/introduction"
-              target="_blank"
-            >
-              <h3 className="text-2xl font-bold">Documentation →</h3>
-              <div className="text-lg">
-                Learn more about Create T3 App, the libraries it uses, and how
-                to deploy it.
-              </div>
-            </Link>
-          </div>
-          <div className="flex flex-col items-center gap-2">
-            
-          </div>
+    <main className="flex min-h-[calc(100vh-3rem)] items-center justify-center p-4">
+      <Card className="w-full max-w-2xl">
+        <CardHeader>
+          <CardTitle>Generate Project Spec</CardTitle>
+          <CardDescription>
+            Fill in the details below to generate a project specification.
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="title">Title</Label>
+              <Input
+                id="title"
+                placeholder="Project title"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                required
+              />
+            </div>
 
-        </div>
-      </main>
-    </HydrateClient>
+            <div className="space-y-2">
+              <Label htmlFor="projectGoals">Project Goals</Label>
+              <Textarea
+                id="projectGoals"
+                placeholder="What are the main goals of this project?"
+                value={projectGoals}
+                onChange={(e) => setProjectGoals(e.target.value)}
+                required
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="projectConstraints">Project Constraints</Label>
+              <Textarea
+                id="projectConstraints"
+                placeholder="What constraints does this project have?"
+                value={projectConstraints}
+                onChange={(e) => setProjectConstraints(e.target.value)}
+                required
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="targetUsers">Target Users</Label>
+              <Textarea
+                id="targetUsers"
+                placeholder="Who are the target users for this project?"
+                value={targetUsers}
+                onChange={(e) => setTargetUsers(e.target.value)}
+                required
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="risks">Risks / Constraints</Label>
+              <Textarea
+                id="risks"
+                placeholder="Any risks or additional constraints? (optional)"
+                value={risks}
+                onChange={(e) => setRisks(e.target.value)}
+              />
+            </div>
+
+            <Button
+              type="submit"
+              className="w-full"
+              disabled={generate.isPending}
+            >
+              {generate.isPending ? "Generating..." : "Generate"}
+            </Button>
+          </form>
+        </CardContent>
+      </Card>
+    </main>
   );
 }
