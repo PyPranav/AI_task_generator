@@ -62,7 +62,7 @@ export function KanbanBoard({ specId }: KanbanBoardProps) {
     },
   });
 
-  const allItems: WorkItem[] = (workItems ?? []) as WorkItem[];
+  const allItems = useMemo(() => workItems ?? [], [workItems]);
 
   // Derive unique categories from tasks
   const categories = useMemo(() => {

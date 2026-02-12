@@ -4,6 +4,17 @@ import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 import {generateTasks, generateUserStories} from "~/server/api/utils/geminiInfer";
 import { generateBasePrompt } from "../utils/prompts";
 
+interface UserStory {
+  title: string;
+  details: string;
+}
+
+interface Task {
+  title: string;
+  details: string;
+  category: string;
+}
+
 export const specRouter = createTRPCRouter({
   hello: publicProcedure
     .input(z.object({ text: z.string() }))
@@ -39,8 +50,8 @@ export const specRouter = createTRPCRouter({
         throw new Error("Failed to generate tasks");
       }
       try{
-        const userStories = JSON.parse(userStoriesRaw.replaceAll('```json', '').replaceAll('```', '').trim());
-        const tasks = JSON.parse(tasksRaw.replaceAll('```json', '').replaceAll('```', '').trim());
+        const userStories = JSON.parse(userStoriesRaw.replaceAll('```json', '').replaceAll('```', '').trim()) as UserStory[];
+        const tasks = JSON.parse(tasksRaw.replaceAll('```json', '').replaceAll('```', '').trim()) as Task[];
 
         console.log("User Stories count:", userStories.length);
         console.log("Tasks count:", tasks.length);
@@ -58,7 +69,7 @@ export const specRouter = createTRPCRouter({
 
           // Insert Stories in bulk with order starting from 0
           await tx.workItem.createMany({
-            data: (userStories as any[]).map((story, index) => ({
+            data: userStories.map((story, index) => ({
               title: story.title,
               details: story?.details??"",
               type: "STORY",
@@ -68,9 +79,9 @@ export const specRouter = createTRPCRouter({
           });
 
           // Insert Tasks in bulk with order continuing after stories
-          const storyCount = (userStories as any[]).length;
+          const storyCount = userStories.length;
           await tx.workItem.createMany({
-            data: (tasks as any[]).map((task, index) => ({
+            data: tasks.map((task, index) => ({
               title: task.title,
               details: task?.details??"",
               category: task.category,

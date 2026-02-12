@@ -102,6 +102,24 @@ This file logs the major prompts used with AI assistants to help build and refin
 - [x] Dynamically derived category list from available work items.
 - [x] Integrated badge counts for each filter option.
 
+---
+
+### 🚀 Build & Linting Fixes - 2026-02-12
+**Goal:** Fix build failures and ESLint errors caused by strict linting rules.
+
+**Prompt:**
+> do bun run build and fix errors
+
+**Tool Used:** Antigravity with Gemini 3.0 Flash
+**Reason:** Resolving build-time TypeScript and ESLint issues.
+
+**Outcome/Notes:** 
+- [x] Fixed unnecessary type assertions in `kanban-board.tsx`.
+- [x] Wrapped `allItems` in `useMemo` for hook dependency compliance.
+- [x] Added `UserStory` and `Task` interfaces in `spec.ts` for type-safe JSON parsing.
+- [x] Replaced `||` with `??` in `toggle-group.tsx` to satisfy `@typescript-eslint/prefer-nullish-coalescing`.
+- [x] Successful build completion via `bun run build`.
+
 ## 📋 Template for New Entries
 *Copy and paste this when adding a new prompt log.*
 
