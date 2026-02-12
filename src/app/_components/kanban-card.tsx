@@ -282,7 +282,16 @@ export function KanbanCard({ item, index }: KanbanCardProps) {
                     </div>
                   </div>
                 )}
-                <div className="mt-4 flex justify-end">
+                <div className="mt-4 flex justify-end gap-2">
+                  <Button
+                    variant="destructive"
+                    size="sm"
+                    className="gap-2"
+                    onClick={() => deleteMutation.mutate({ id: item.id })}
+                  >
+                    <Trash2 className="size-3.5" />
+                    Delete
+                  </Button>
                   <Button
                     variant="outline"
                     size="sm"

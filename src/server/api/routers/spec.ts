@@ -16,14 +16,6 @@ interface Task {
 }
 
 export const specRouter = createTRPCRouter({
-  hello: publicProcedure
-    .input(z.object({ text: z.string() }))
-    .query(({ input }) => {
-      return {
-        greeting: `Hello ${input.text}`,
-      };
-    }),
-
   checkHealth: publicProcedure.query(async ({ ctx }) => {
     const start = Date.now();
     let dbStatus = "unknown";
@@ -125,14 +117,6 @@ export const specRouter = createTRPCRouter({
         return { success: false };
       }
     }),
-
-  getLatest: publicProcedure.query(async ({ ctx }) => {
-    const spec = await ctx.db.spec.findFirst({
-      orderBy: { createdAt: "desc" },
-    });
-
-    return spec ?? null;
-  }),
 
   list: publicProcedure
     .input(
