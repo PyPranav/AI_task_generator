@@ -6,6 +6,7 @@ import { Geist } from "next/font/google";
 import { TRPCReactProvider } from "~/trpc/react";
 import { SidebarProvider, SidebarInset, SidebarTrigger } from "~/components/ui/sidebar";
 import { SpecSidebar } from "~/app/_components/spec-sidebar";
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
   title: "Create T3 App",
@@ -34,6 +35,7 @@ export default function RootLayout({
               {children}
             </SidebarInset>
           </SidebarProvider>
+          <Toaster position="bottom-right" theme="dark" richColors />
         </TRPCReactProvider>
       </body>
     </html>

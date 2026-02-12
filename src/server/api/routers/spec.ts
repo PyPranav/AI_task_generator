@@ -185,4 +185,13 @@ export const specRouter = createTRPCRouter({
 
       return { success: true };
     }),
+
+  deleteWorkItem: publicProcedure
+    .input(z.object({ id: z.string() }))
+    .mutation(async ({ ctx, input }) => {
+      await ctx.db.workItem.delete({
+        where: { id: input.id },
+      });
+      return { success: true };
+    }),
 });
