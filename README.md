@@ -2,6 +2,10 @@
 
 A web application that generates detailed project specifications, user stories, and engineering tasks from a simple idea using AI.
 
+# Demo Video
+![Uploading 20260213-0617-51.5147347.gif…]()
+
+
 ## Features (What is Done)
 
 - **AI-Powered Spec Generation**: Enter a project idea, goals, and constraints to generate a full specification using Google Gemini Flash.
