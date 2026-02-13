@@ -3,7 +3,7 @@
 A web application that generates detailed project specifications, user stories, and engineering tasks from a simple idea using AI.
 
 # Demo Video
-![Uploading 20260213-0617-51.5147347.gif…]()
+![20260213-0619-20 2086544](https://github.com/user-attachments/assets/a8da4899-6eb4-49ca-b8d4-c8a4625e01d8)
 
 
 ## Features (What is Done)
