@@ -2,9 +2,10 @@
 
 A web application that generates detailed project specifications, user stories, and engineering tasks from a simple idea using AI.
 
-# Demo Video
+# Demo
 ![20260213-0619-20 2086544](https://github.com/user-attachments/assets/a8da4899-6eb4-49ca-b8d4-c8a4625e01d8)
-
+<img width="1740" height="976" alt="image" src="https://github.com/user-attachments/assets/905bbaae-5ed1-4748-8890-9de8a7a2a392" />
+<img width="1739" height="977" alt="image" src="https://github.com/user-attachments/assets/254b8b0a-efea-4097-91de-d0433b835231" />
 
 ## Features (What is Done)
 
