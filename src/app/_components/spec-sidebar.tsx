@@ -28,6 +28,7 @@ export function SpecSidebar() {
       { limit: 5 },
       {
         getNextPageParam: (lastPage) => lastPage.nextCursor,
+        initialCursor: undefined,
       },
     );
 

@@ -192,3 +192,17 @@ This file logs the major prompts used with AI assistants to help build and refin
 - [x] Added active route highlighting in the sidebar via `usePathname()` and `isActive` prop.
 
 ---
+
+### 🐛 Load More Button Fix
+**Goal:** Fix the "Load More" button in the sidebar that wasn't loading older specs.
+
+**Prompt:**
+> the load more button doenst add older specs? the loader acts like working and doesnt add anything once loader finishes
+
+**Tool Used:** Claude Code
+**Reason:** Debugging cursor-based pagination issue in tRPC v11 infinite query
+
+**Outcome/Notes:**
+- [x] Added `initialCursor: undefined` to `useInfiniteQuery` options in `spec-sidebar.tsx` — required by tRPC v11 + React Query v5 for cursor-based pagination to work.
+
+---
